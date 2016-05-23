@@ -32,7 +32,6 @@
     "default_title": "Export comments",
     "default_popup": "popup.html"
   },
-  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqLQRY2ymVq4qBw8sBrXenxjGnewqWwat1/Tij2ZtoPXocQT27YgpHtFlzafixGd70W60bQdMeFiNSAqo/v7nWS4fCsY4ncIViH90Lblmpo9Ns/77U1dRHEWfqSAG4h6AfkXKX56IX3VjO0oI7nDHOG+m9TvMaNtdTPaserRuS9q1A1QDcESmvbZ+9xY7RMvB/Xjji36exiNsg+YPRB7OW0xDWIkCWsUH+d4ORpEa+uOaeaEqRiiVNWK8pIYunvGgsQPf4KXAazzU+UiQUgBJCqqA/kpxTtccFuK2pfb3swEXoBUP8mnG3zk9U9idJzitFTLMH8/nz/04r2N0WWOTnwIDAQAB",
   "manifest_version": 2,
   "name": "YouTube Comment Exporter",
   "update_url": "https://clients2.google.com/service/update2/crx",
