@@ -5,6 +5,7 @@ var CommentExporter = function(request, sendResponse) {
     var commentSelector = '.comment-renderer-content';
     var startTime = 0;
     var fileType = 'xlsx';
+    var filenamePrefix = 'YouTubeComments';
 
     function extractComments(comments) {
         var now = Math.floor(Date.now() / 1000);
@@ -98,8 +99,8 @@ var CommentExporter = function(request, sendResponse) {
 
     function exportToFile(items, fileType) {
         fileType = fileType || 'xlsx';
-        var contentType = 'application/octet-stream';
-        var filenamePrefix = 'test', wbout;
+        var contentType = 'application/octet-stream', wbout;
+        var videoId = $("meta[itemprop='videoId']")[0].attributes.content.value;
 
         var oo = [
             [
@@ -142,7 +143,7 @@ var CommentExporter = function(request, sendResponse) {
             wbout = s2ab(XLSX.write(wb, {bookType: 'xlsx', bookSST: false, type: 'binary'}));
         }
 
-        saveAs(new Blob([wbout], {type: contentType}), filenamePrefix + "." + fileType);
+        saveAs(new Blob([wbout], {type: contentType}), filenamePrefix + "-" + videoId + "." + fileType);
 
         // Scroll back to top
         document.body.scrollTop = document.documentElement.scrollTop = 0;
