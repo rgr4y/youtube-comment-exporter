@@ -6,6 +6,7 @@ var CommentExporter = function(request, sendResponse) {
     var startTime = 0;
     var fileType = 'xlsx';
     var filenamePrefix = 'YouTubeComments';
+    var videoId;
 
     function extractComments(comments) {
         var now = Math.floor(Date.now() / 1000);
@@ -37,7 +38,8 @@ var CommentExporter = function(request, sendResponse) {
     function startExtracting(request) {
         numToExtract = parseInt(request.num);
         fileType = request.fileType;
-
+        videoId = $("meta[itemprop='videoId']")[0].attributes.content.value;
+        
         chrome.storage.sync.set({'numToExtract': numToExtract}, function() {
             console.log("Extracting " + numToExtract + ' comments to ' + fileType);
 
@@ -100,11 +102,10 @@ var CommentExporter = function(request, sendResponse) {
     function exportToFile(items, fileType) {
         fileType = fileType || 'xlsx';
         var contentType = 'application/octet-stream', wbout;
-        var videoId = $("meta[itemprop='videoId']")[0].attributes.content.value;
 
         var oo = [
             [
-                ['Username', 'Comment'],
+                ['VideoID', 'Username', 'YTID', 'Comment'],
             ],
             []
         ];
@@ -113,9 +114,11 @@ var CommentExporter = function(request, sendResponse) {
 
         $.each(items, function (k, v) {
             var item = $(v);
-            var author = $(".comment-author-text", item).text();
+            var authorEl = $(".comment-author-text", item);
+            var author = authorEl.text();
+            var ytid = authorEl.attr('data-ytid');
             var comment = $(".comment-renderer-text-content", item).text();
-            oo[0].push([author, comment]);
+            oo[0].push([videoId, author, ytid, comment]);
         });
 
         /* original data */
